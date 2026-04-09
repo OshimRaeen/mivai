@@ -1,7 +1,7 @@
 import { SignInButton, UserButton, Show } from "@clerk/nextjs";
 
-const SignInBtn = () => (
-  <button className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-200 transition-colors">
+const CustomSignInBtn = () => (
+  <button className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-200 transition-colors shadow-sm">
     Sign In / Register
   </button>
 );
@@ -17,14 +17,17 @@ export default function Home() {
 
         <div className="mt-8">
           <Show when="signed-out">
-            <SignInButton mode="modal">
-              <SignInBtn />
+            <SignInButton mode="modal" fallbackRedirectUrl="/dashboard">
+              <CustomSignInBtn />
             </SignInButton>
           </Show>
 
           <Show when="signed-in">
             <div className="flex flex-col items-center gap-4">
               <p className="text-emerald-400 font-medium">You are securely authenticated!</p>
+              <a href="/dashboard" className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-200 transition-colors">
+                Go to Dashboard
+              </a>
               <UserButton />
             </div>
           </Show>

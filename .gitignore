@@ -1,5 +1,18 @@
-# Ignore node modules
+# Dependency directories
 node_modules/
+frontend/node_modules/
+backend/node_modules/
+shared/node_modules/
 
-# Ignore environment variables file
+# Next.js build output
+frontend/.next/
+
+# Environment variables
 .env
+.env.local
+backend/.env
+frontend/.env.local
+
+# Misc
+.DS_Store
+dist/
