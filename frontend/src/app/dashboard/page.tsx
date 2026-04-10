@@ -5,7 +5,8 @@ import { useUser, UserButton } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '../../store/useUserStore';
 import { motion, Variants } from 'framer-motion';
-import { Video, Users, ChevronRight, LayoutDashboard, Clock } from 'lucide-react';
+import Link  from 'next/link';
+import { Video, Users, ChevronRight, LayoutDashboard, Clock, } from 'lucide-react';
 
 export default function DashboardPage() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -85,13 +86,13 @@ export default function DashboardPage() {
               </div>
               <h2 className="text-3xl font-semibold tracking-tight mb-3">AI Interview.</h2>
               <p className="text-[#1d1d1f]/60 text-lg font-medium leading-relaxed max-w-[90%]">
-                Practice solo with our advanced Vapi engine. Get instant, actionable feedback.
+                Practice solo with our advanced AI engine. Get instant, actionable feedback.
               </p>
             </div>
             <div className="mt-8">
-              <span className="inline-flex items-center text-blue-500 font-semibold text-lg group-hover:translate-x-1 transition-transform duration-300">
-                Start session <ChevronRight className="w-5 h-5 ml-1" />
-              </span>
+              <Link href="/interview/setup" className="inline-flex items-center text-blue-500 font-semibold text-lg group-hover:translate-x-1 transition-transform duration-300">
+  Start session <ChevronRight className="w-5 h-5 ml-1" />
+</Link>
             </div>
           </motion.div>
 
