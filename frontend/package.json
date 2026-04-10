@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.11",
+    "@monaco-editor/react": "^4.7.0",
     "@vapi-ai/web": "^2.5.2",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",
