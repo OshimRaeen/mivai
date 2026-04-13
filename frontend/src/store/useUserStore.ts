@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { IUser } from '@app/shared'; // Keep this if you are using your shared types!
 
 interface InterviewConfig {
   category: string;
@@ -13,21 +12,33 @@ interface InterviewConfig {
 }
 
 interface UserState {
-  mongoUser: IUser | null;
+  mongoUser: any | null; 
   isLoading: boolean;
   interviewConfig: InterviewConfig | null;
+  
+  // 🚀 NEW: Global Editor State so the AI can read it!
+  editorCode: string;
+  editorLanguage: string;
+  
   fetchMongoUser: (clerkId: string) => Promise<void>;
   setInterviewConfig: (config: InterviewConfig) => void;
   clearInterviewConfig: () => void;
+  
+  // 🚀 NEW: Functions to update the editor state
+  setEditorCode: (code: string) => void;
+  setEditorLanguage: (lang: string) => void;
 }
 
-// Wrap the entire store in the persist middleware
 export const useUserStore = create<UserState>()(
   persist(
     (set) => ({
       mongoUser: null,
       isLoading: false,
       interviewConfig: null,
+      
+      // Default global state for the editor
+      editorCode: '// Write your optimized solution here...\n\nfunction solve() {\n  \n}\n',
+      editorLanguage: 'javascript',
       
       fetchMongoUser: async (clerkId: string) => {
         set({ isLoading: true });
@@ -43,17 +54,17 @@ export const useUserStore = create<UserState>()(
       },
 
       setInterviewConfig: (config) => set({ interviewConfig: config }),
-      
-      // A helper function so we can clear the config when the interview actually ends
       clearInterviewConfig: () => set({ interviewConfig: null }),
+      
+      setEditorCode: (code) => set({ editorCode: code }),
+      setEditorLanguage: (lang) => set({ editorLanguage: lang }),
     }),
     {
-      name: 'mock-interview-storage', // The unique key used in localStorage
-      
-      // We only want to save the config and the user data, not the loading states
+      name: 'mock-interview-storage',
       partialize: (state) => ({ 
         interviewConfig: state.interviewConfig,
         mongoUser: state.mongoUser 
+        // We do NOT persist the code, so it resets fresh on a new interview
       }),
     }
   )
