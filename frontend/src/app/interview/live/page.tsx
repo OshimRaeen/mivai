@@ -378,6 +378,10 @@ ${technicalRules}
 
     try {
       await vapi.start({
+
+        server:{
+          url:'https://lupita-sudoriferous-peartly.ngrok-free.dev/api/webhook/vapi',
+        }, 
         firstMessage: `Hello ${candidateName}, thanks for joining today. I'm your interviewer for this ${role} position at ${company}. Before we dive in, could you briefly walk me through your background?`,
         model: {
           provider: 'openai',
