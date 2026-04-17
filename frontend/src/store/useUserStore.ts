@@ -19,6 +19,9 @@ interface UserState {
   // 🚀 NEW: Global Editor State so the AI can read it!
   editorCode: string;
   editorLanguage: string;
+
+  editorOutput: string;
+  setEditorOutput: (output: string) => void;
   
   fetchMongoUser: (clerkId: string) => Promise<void>;
   setInterviewConfig: (config: InterviewConfig) => void;
@@ -39,6 +42,9 @@ export const useUserStore = create<UserState>()(
       // Default global state for the editor
       editorCode: '// Write your optimized solution here...\n\nfunction solve() {\n  \n}\n',
       editorLanguage: 'javascript',
+
+      editorOutput: '',
+      setEditorOutput: (output) => set({ editorOutput: output }),
       
       fetchMongoUser: async (clerkId: string) => {
         set({ isLoading: true });
