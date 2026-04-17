@@ -6,6 +6,8 @@ import { connectDB } from './config/db.js';
 import webhookRoutes from './routes/webhookRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
+import interviewRoutes from './routes/interviewRoutes.js';
+
 dotenv.config();
 connectDB();
 
@@ -19,6 +21,7 @@ app.use('/api/webhooks', webhookRoutes);
 app.use(express.json());
 
 app.use('/api/users', userRoutes);
+app.use('/api/interviews', interviewRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running in development mode on port ${PORT}`);
