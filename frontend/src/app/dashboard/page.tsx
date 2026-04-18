@@ -132,9 +132,9 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="mt-8">
-              <span className="inline-flex items-center text-purple-500 font-semibold text-lg group-hover:translate-x-1 transition-transform duration-300">
+              <Link href="/interview/peer" className="inline-flex items-center text-blue-500 font-semibold text-lg group-hover:translate-x-1 transition-transform duration-300">
                 Find a match <ChevronRight className="w-5 h-5 ml-1" />
-              </span>
+              </Link>
             </div>
           </motion.div>
         </div>
