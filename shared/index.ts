@@ -33,3 +33,19 @@ export interface IInterview {
   };
   createdAt?: Date;
 }
+
+
+export interface IRoom {
+  roomId: string;
+  status: 'waiting' | 'active' | 'completed';
+  category: string;
+  difficulty: string;
+  duration: string | number; // 🚀 NEW
+  experience?: string;       // 🚀 NEW
+  targetRole?: string;       // 🚀 NEW
+  company?: string;          // 🚀 NEW
+  startedAt?: Date;
+  creatorId: string;
+  peerId?: string;
+  createdAt?: Date;
+}

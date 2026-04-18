@@ -8,6 +8,10 @@ import userRoutes from './routes/userRoutes.js';
 
 import interviewRoutes from './routes/interviewRoutes.js';
 
+import roomRoutes from './routes/roomRoutes.js'; 
+
+import streamRoutes from './routes/streamRoutes.js';
+
 dotenv.config();
 connectDB();
 
@@ -22,6 +26,8 @@ app.use(express.json());
 
 app.use('/api/users', userRoutes);
 app.use('/api/interviews', interviewRoutes);
+app.use('/api/rooms', roomRoutes);
+app.use('/api/stream', streamRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running in development mode on port ${PORT}`);
