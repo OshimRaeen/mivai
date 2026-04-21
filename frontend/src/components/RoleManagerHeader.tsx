@@ -11,11 +11,11 @@ interface RoleManagerHeaderProps {
 }
 
 export default function RoleManagerHeader({ roomId, onTimeUp }: RoleManagerHeaderProps) {
-  const mongoUser = (useUserStore.getState() as any).mongoUser;
+  // 🚀 FIX: Pulling both mongoUser AND the new global interviewer state from Zustand
+  const { mongoUser, isInterviewer, setIsInterviewer } = useUserStore() as any;
   
   const [roomData, setRoomData] = useState<any>(null);
   const [timeLeft, setTimeLeft] = useState<string>('--:--');
-  const [isInterviewer, setIsInterviewer] = useState<boolean>(false);
   const [phase, setPhase] = useState<1 | 2>(1);
   const [showToast, setShowToast] = useState(false);
 
@@ -71,9 +71,7 @@ export default function RoleManagerHeader({ roomId, onTimeUp }: RoleManagerHeade
          setPhase(1);
       }
 
-      // Assign Roles: 
-      // Room Creator is Interviewer in Phase 1, Interviewee in Phase 2
-      // Peer is Interviewee in Phase 1, Interviewer in Phase 2
+      // 🚀 FIX: Using the global setIsInterviewer instead of local state
       const isCreator = mongoUser._id === roomData.creatorId;
       if (currentPhase === 1) {
         setIsInterviewer(isCreator);
@@ -84,7 +82,7 @@ export default function RoleManagerHeader({ roomId, onTimeUp }: RoleManagerHeade
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [roomData, mongoUser, phase, onTimeUp]);
+  }, [roomData, mongoUser, phase, onTimeUp, setIsInterviewer]);
 
   if (!roomData) {
     return (

@@ -16,20 +16,24 @@ interface UserState {
   isLoading: boolean;
   interviewConfig: InterviewConfig | null;
   
-  // 🚀 NEW: Global Editor State so the AI can read it!
+  // Global Editor State
   editorCode: string;
   editorLanguage: string;
-
   editorOutput: string;
-  setEditorOutput: (output: string) => void;
   
+  // 🚀 NEW: Global Interviewer State
+  isInterviewer: boolean;
+
+  setEditorOutput: (output: string) => void;
   fetchMongoUser: (clerkId: string) => Promise<void>;
   setInterviewConfig: (config: InterviewConfig) => void;
   clearInterviewConfig: () => void;
   
-  // 🚀 NEW: Functions to update the editor state
   setEditorCode: (code: string) => void;
   setEditorLanguage: (lang: string) => void;
+  
+  // 🚀 NEW: Setter for Interviewer State
+  setIsInterviewer: (val: boolean) => void;
 }
 
 export const useUserStore = create<UserState>()(
@@ -39,11 +43,13 @@ export const useUserStore = create<UserState>()(
       isLoading: false,
       interviewConfig: null,
       
-      // Default global state for the editor
       editorCode: '// Write your optimized solution here...\n\nfunction solve() {\n  \n}\n',
       editorLanguage: 'javascript',
-
       editorOutput: '',
+      
+      // 🚀 NEW: Default state
+      isInterviewer: false,
+
       setEditorOutput: (output) => set({ editorOutput: output }),
       
       fetchMongoUser: async (clerkId: string) => {
@@ -64,13 +70,16 @@ export const useUserStore = create<UserState>()(
       
       setEditorCode: (code) => set({ editorCode: code }),
       setEditorLanguage: (lang) => set({ editorLanguage: lang }),
+      
+      // 🚀 NEW: Update global interviewer state
+      setIsInterviewer: (val) => set({ isInterviewer: val }),
     }),
     {
       name: 'mock-interview-storage',
       partialize: (state) => ({ 
         interviewConfig: state.interviewConfig,
         mongoUser: state.mongoUser 
-        // We do NOT persist the code, so it resets fresh on a new interview
+        // We do NOT persist the code or interviewer role, so it resets fresh on a new interview
       }),
     }
   )
