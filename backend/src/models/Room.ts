@@ -3,6 +3,16 @@ import { type IRoom } from '@app/shared'; // Or your specific path
 
 export interface IRoomDocument extends IRoom, Document {}
 
+
+const feedbackSchema = new Schema({
+  fromUserId: { type: String, required: true },
+  toUserId: { type: String, required: true },
+  rating: { type: Number, required: true, min: 1, max: 5 },
+  strengths: { type: String, required: true },
+  weaknesses: { type: String, required: true },
+  submittedAt: { type: Date, default: Date.now }
+}, { _id: false }); // Disable _id for sub-documents to keep the DB clean
+
 const roomSchema = new Schema<IRoomDocument>({
   roomId: { type: String, required: true, unique: true, index: true },
   status: { type: String, enum: ['waiting', 'active', 'completed'], default: 'waiting', index: true },
@@ -10,7 +20,7 @@ const roomSchema = new Schema<IRoomDocument>({
   difficulty: { type: String, required: true },
   
   // 🚀 NEW FIELDS ALLOWED IN DB
-  duration: { type: String, required: true, default: "45" },
+  duration: { type: String, required: true, default: "15" },
   experience: { type: String },
   targetRole: { type: String },
   company: { type: String },
@@ -18,7 +28,11 @@ const roomSchema = new Schema<IRoomDocument>({
   creatorId: { type: String, required: true },
   peerId: { type: String },
   startedAt: { type: Date },
-  createdAt: { type: Date, default: Date.now, expires: 3600 } 
+
+  feedback: [feedbackSchema],
+
+  createdAt: { type: Date, default: Date.now } ,
+  
 });
 
 export default mongoose.models.Room || mongoose.model<IRoomDocument>('Room', roomSchema);

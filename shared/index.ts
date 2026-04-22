@@ -34,18 +34,27 @@ export interface IInterview {
   createdAt?: Date;
 }
 
+export interface IFeedback {
+  fromUserId: string;
+  toUserId: string;
+  rating: number;         // 1 to 5 stars
+  strengths: string;
+  weaknesses: string;
+  submittedAt: Date;
+}
 
 export interface IRoom {
   roomId: string;
   status: 'waiting' | 'active' | 'completed';
   category: string;
   difficulty: string;
-  duration: string | number; // 🚀 NEW
-  experience?: string;       // 🚀 NEW
-  targetRole?: string;       // 🚀 NEW
-  company?: string;          // 🚀 NEW
+  duration: string | number; 
+  experience?: string;       
+  targetRole?: string;       
+  company?: string;          
   startedAt?: Date;
   creatorId: string;
   peerId?: string;
   createdAt?: Date;
+  feedback?: IFeedback[];
 }
