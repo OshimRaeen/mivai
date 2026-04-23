@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { type IRoom } from '@app/shared'; // Or your specific path
+import { type IRoom } from '../types/shared.js'; // Or your specific path
 
 export interface IRoomDocument extends IRoom, Document {}
 

@@ -2,7 +2,7 @@
 
 import mongoose, { Schema, Document } from 'mongoose';
 
-import { type IUser } from '@app/shared'; 
+import { type IUser } from '../types/shared.js'; // Or your specific path
 
 // We extend our shared IUser interface with Mongoose's Document interface 
 // so Mongoose knows about built-in methods like .save()

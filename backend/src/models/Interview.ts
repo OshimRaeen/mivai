@@ -1,7 +1,7 @@
 
 import mongoose, { Schema, Document } from 'mongoose';
 
-import {type IInterview } from '@app/shared'; 
+import {type IInterview } from '../types/shared.js'; 
 
 // We combine the Mongoose Document type with our shared interface
 export interface IInterviewDocument extends IInterview, Document {}
