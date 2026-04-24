@@ -63,7 +63,7 @@ export default function PeerInterviewRoom() {
 
   // ── Fetch room category (independent from stream init) ───────────────────
   useEffect(() => {
-    fetch(`http://localhost:5001/api/rooms/${roomId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`)
       .then(r => r.json())
       .then(d => { if (isMounted.current) setRoomCategory(d.category); })
       .catch(() => {});
@@ -95,7 +95,7 @@ export default function PeerInterviewRoom() {
 
     const initializeStream = async () => {
       try {
-        const res = await fetch('http://localhost:5001/api/stream/token', {
+        const res = await fetch('${process.env.NEXT_PUBLIC_API_URL}/api/stream/token', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ userId: mongoUser._id }),
@@ -321,13 +321,13 @@ export default function PeerInterviewRoom() {
 //   const [isVideoCollapsed, setIsVideoCollapsed] = useState(false);
 
 //   useEffect(() => {
-//     fetch(`http://localhost:5001/api/rooms/${roomId}`).then(r => r.json()).then(d => setRoomCategory(d.category)).catch(() => {});
+//     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`).then(r => r.json()).then(d => setRoomCategory(d.category)).catch(() => {});
 //     if (!roomId || !mongoUser) return;
 //     let videoClient: StreamVideoClient;
 
 //     const initializeStream = async () => {
 //       try {
-//         const response = await fetch('http://localhost:5001/api/stream/token', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: mongoUser._id }) });
+//         const response = await fetch('${process.env.NEXT_PUBLIC_API_URL}/api/stream/token', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: mongoUser._id }) });
 //         const { token } = await response.json();
 //         videoClient = new StreamVideoClient({ apiKey, user: { id: mongoUser._id, name: mongoUser.firstName || 'Dev' }, token });
 //         setClient(videoClient);

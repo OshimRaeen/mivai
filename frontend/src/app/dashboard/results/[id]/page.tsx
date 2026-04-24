@@ -24,7 +24,7 @@ export default function ResultsPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/interviews/${params.id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/interviews/${params.id}`);
         if (!response.ok) throw new Error('Failed to fetch data');
         const json = await response.json();
         setData(json);

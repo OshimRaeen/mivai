@@ -36,7 +36,7 @@ export default function DashboardPage() {
     const fetchHistory = async () => {
       if (!mongoUser?._id) return;
       try {
-        const response = await fetch(`http://localhost:5001/api/interviews/user/${mongoUser._id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/interviews/user/${mongoUser._id}`);
         if (!response.ok) throw new Error('Failed to fetch history');
         const data = await response.json();
         setInterviews(data);
@@ -53,7 +53,7 @@ export default function DashboardPage() {
     const fetchPeerHistory = async () => {
       if (!mongoUser?._id) return;
       try {
-        const response = await fetch(`http://localhost:5001/api/rooms/history/${mongoUser._id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/history/${mongoUser._id}`);
         if (!response.ok) throw new Error('Failed to fetch peer history');
         const data = await response.json();
         setPeerSessions(data);

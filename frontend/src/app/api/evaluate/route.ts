@@ -80,7 +80,7 @@ export async function POST(req: Request) {
     console.log('✅ AI Evaluation Complete! Handing off to Express Backend...');
     
     // 🚀 FIXED: Added problemStatement to the Express handoff payload
-    const backendResponse = await fetch('http://localhost:5001/api/interviews', {
+    const backendResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/interviews`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

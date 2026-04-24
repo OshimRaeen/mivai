@@ -20,7 +20,7 @@ export default function PeerFeedbackPage() {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/api/rooms/${roomId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`)
       .then(r => r.json())
       .then(setRoomData)
       .catch(() => {});
@@ -34,7 +34,7 @@ export default function PeerFeedbackPage() {
     const peerId = mongoUser._id === roomData.creatorId ? roomData.peerId : roomData.creatorId;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/rooms/${roomId}/feedback`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}/feedback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

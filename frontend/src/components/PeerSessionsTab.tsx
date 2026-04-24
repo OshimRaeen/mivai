@@ -13,7 +13,7 @@ export default function PeerSessionsTab() {
     if (!mongoUser) return;
     const fetchHistory = async () => {
       try {
-        const res = await fetch(`http://localhost:5001/api/rooms/history/${mongoUser._id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/history/${mongoUser._id}`);
         const data = await res.json();
         setSessions(data);
       } catch (err) {

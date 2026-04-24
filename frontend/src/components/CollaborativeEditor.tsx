@@ -63,7 +63,7 @@ export default function CollaborativeEditor({ roomId }: Props) {
 
   // ── Hydration + local-storage restore ────────────────────────────────────
   useEffect(() => {
-    fetch(`http://localhost:5001/api/rooms/${roomId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`)
       .then(r => r.json())
       .then(d => setRoomCategory(d.category))
       .catch(() => {});
@@ -220,7 +220,7 @@ export default function CollaborativeEditor({ roomId }: Props) {
     setOutput('Compiling…');
     setIsError(false);
     try {
-      const res  = await fetch('http://localhost:3000/api/execute', {
+      const res  = await fetch('/api/execute', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ code: editorCode, language: editorLanguage }),
@@ -525,7 +525,7 @@ export default function CollaborativeEditor({ roomId }: Props) {
 
 //   // ─── 🚀 THE FIX: SMART INITIALIZATION & RECOVERY ───
 //   useEffect(() => {
-//     fetch(`http://localhost:5001/api/rooms/${roomId}`).then(r => r.json()).then(d => setRoomCategory(d.category)).catch(() => {});
+//     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`).then(r => r.json()).then(d => setRoomCategory(d.category)).catch(() => {});
     
 //     const savedCode = localStorage.getItem(`code_${roomId}`);
 //     const savedLang = localStorage.getItem(`lang_${roomId}`);

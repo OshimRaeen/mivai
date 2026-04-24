@@ -32,7 +32,7 @@ export default function RoleManagerHeader({ roomId, onTimeUp }: RoleManagerHeade
 
   // ── Fetch room data once ──────────────────────────────────────────────────
   useEffect(() => {
-    fetch(`http://localhost:5001/api/rooms/${roomId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`)
       .then(res => res.json())
       .then(setRoomData)
       .catch(() => {});
@@ -180,7 +180,7 @@ export default function RoleManagerHeader({ roomId, onTimeUp }: RoleManagerHeade
 //   const [showToast, setShowToast] = useState(false);
 
 //   useEffect(() => {
-//     fetch(`http://localhost:5001/api/rooms/${roomId}`).then(res => res.json()).then(setRoomData).catch(() => {});
+//     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`).then(res => res.json()).then(setRoomData).catch(() => {});
 //   }, [roomId]);
 
 //   useEffect(() => {

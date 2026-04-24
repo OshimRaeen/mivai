@@ -42,7 +42,7 @@ export default function PeerMatchmakingPage() {
     setIsSearching(true);
     
     try {
-      const response = await fetch('http://localhost:5001/api/rooms/match', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/match`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -73,7 +73,7 @@ export default function PeerMatchmakingPage() {
   const pollForPartner = (roomId: string) => {
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:5001/api/rooms/${roomId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`);
         const roomData = await res.json();
         
         if (roomData.status === 'active') {

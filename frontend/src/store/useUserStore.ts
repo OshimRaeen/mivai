@@ -55,7 +55,7 @@ export const useUserStore = create<UserState>()(
       fetchMongoUser: async (clerkId: string) => {
         set({ isLoading: true });
         try {
-          const response = await fetch(`http://localhost:5001/api/users/${clerkId}`);
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${clerkId}`);
           if (!response.ok) throw new Error('Failed to fetch user');
           const data = await response.json();
           set({ mongoUser: data, isLoading: false });
