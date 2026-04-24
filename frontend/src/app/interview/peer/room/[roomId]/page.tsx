@@ -95,7 +95,7 @@ export default function PeerInterviewRoom() {
 
     const initializeStream = async () => {
       try {
-        const res = await fetch('${process.env.NEXT_PUBLIC_API_URL}/api/stream/token', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stream/token`, {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ userId: mongoUser._id }),
