@@ -74,7 +74,7 @@ MIVAI uses a dual-environment setup. You will need API keys for Clerk, Stream, M
 
 **1. Clone the Repository**
 ```bash
-git clone [https://github.com/yourusername/mivai.git](https://github.com/yourusername/mivai.git)
+git clone [https://github.com/OshimRaeen/mivai.git](https://github.com/OshimRaeen/mivai.git)
 cd mivai
 
 
